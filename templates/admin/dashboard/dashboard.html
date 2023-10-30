@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Job</title>
+    {% include 'admin_partials/_css.html' %}
+</head>
+
+<body>
+    <div id="wrapper">
+        {% include 'admin_partials/_header.html' %}
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a class="active-menu" href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'candidates' %}"><i class="fa fa-fw fa-users"></i> Candidates</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'categories' %}"><i class="fa fa-qrcode"></i> Categories</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'companies' %}"><i class="fa fa-fw fa-building"></i> Companies</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'jobs' %}"><i class="fa fa-fw fa-search"></i> Jobs</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'banners' %}"><i class="fa fa-fw fa-image"></i> Banners</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'notifications' %}"><i class="fa fa-fw fa-bell-o"></i> Notifications</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> Reports<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url 'report-companies' %}"><i class="fa fa-building"></i> Companies</a></li>
+                            <li><a href="{% url 'report-candidates' %}"><i class="fa fa-users"></i> Candidates</a></li>
+                            <li><a href="{% url 'report-upload-jobs' %}"><i class="fa fa-upload"></i> Upload Jobs</a></li>
+                            <li><a href="{% url 'report-apply-jobs' %}"><i class="fa fa-paper-plane"></i> Apply Jobs</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'index' %}"><i class="fa fa-fw fa-globe"></i> Website</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'company-setting' %}"><i class="fa fa-fw fa-cog"></i> Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="logoutAction()"><i class="fa fa-fw fa-power-off"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <a class="dash" href="#">
+                            <div class="panel panel-primary text-center no-boder bg-color-green">
+                                <div class="panel-body">
+                                    <i class="fa fa-bar-chart-o fa-5x"></i>
+                                    <h3>8,457</h3>
+                                </div>
+                                <div class="panel-footer back-footer-green">
+                                    Daily Visits
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <a class="dash" href="{% url 'jobs' %}">
+                            <div class="panel panel-primary text-center no-boder bg-color-blue">
+                                <div class="panel-body">
+                                    <i class="fa fa-search fa-5x"></i>
+                                    <h3>252,160 </h3>
+                                </div>
+                                <div class="panel-footer back-footer-blue">
+                                    Jobs
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <a class="dash" href="{% url 'companies' %}">
+                            <div class="panel panel-primary text-center no-boder bg-color-red">
+                                <div class="panel-body">
+                                    <i class="fa fa fa-building fa-5x"></i>
+                                    <h3>823 </h3>
+                                </div>
+                                <div class="panel-footer back-footer-red">
+                                    Companies
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <a class="dash" href="{% url 'candidates' %}">
+                            <div class="panel panel-primary text-center no-boder bg-color-brown">
+                                <div class="panel-body">
+                                    <i class="fa fa-users fa-5x"></i>
+                                    <h3>6,752 </h3>
+                                </div>
+                                <div class="panel-footer back-footer-brown">
+                                    Candidates
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Revenue
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-bar-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Report Per Year
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                System Logs
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">7 minutes ago</span>
+                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">16 minutes ago</span>
+                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">36 minutes ago</span>
+                                        <i class="fa fa-fw fa-globe"></i> Invoice 653 has paid
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">1 hour ago</span>
+                                        <i class="fa fa-fw fa-user"></i> A new user has been added
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">1.23 hour ago</span>
+                                        <i class="fa fa-fw fa-user"></i> A new user has added
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">yesterday</span>
+                                        <i class="fa fa-fw fa-globe"></i> Saved the world
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">36 minutes ago</span>
+                                        <i class="fa fa-fw fa-truck"></i> Order 92 shipped
+                                    </a>
+                                </div>
+                                <div class="text-right">
+                                    <a href="#">More Logs <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Recent Candidates
+                            </div> 
+                            <div class="panel-body" style="margin-bottom: -6px;">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Gender</th>
+                                                <th>Tel</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for candidate in candidates %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ candidate.account.get_full_name }}</td>
+                                                <td>{{ candidate.account.get_sex_display }}</td>
+                                                <td>
+                                                    {% if candidate.account.phone != '' %}
+                                                    <a class="tel" href="tel:{{ candidate.account.get_phone }}">
+                                                        {{ candidate.account.get_phone }}
+                                                    </a>
+                                                    {% else %}
+                                                        {{ candidate.account.get_phone }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <a class="email" href="mailTo:{{ candidate.account.get_email }}">
+                                                        {{ candidate.account.get_email }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {% if candidate.status %}
+                                                        <i id="status-yes" class="fa fa-check-circle"></i>
+                                                    {% else %}
+                                                        <i id="status-no" class="fa fa-times-circle"></i>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-right">
+                                    <a href="{% url 'candidates' %}">See All <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+
+    <script src="../../../static/admin/js/jquery-1.10.2.js"></script>
+    <script src="../../../static/admin/js/bootstrap.min.js"></script>
+    <script src="../../../static/admin/js/jquery.metisMenu.js"></script>
+    <script src="../../../static/admin/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="../../../static/admin/js/morris/morris.js"></script>
+    <script src="../../../static/admin/js/custom-scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

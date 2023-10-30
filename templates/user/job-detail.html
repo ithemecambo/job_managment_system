@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Online Job</title>
+	<link rel="stylesheet" type="text/css" href="../../static/user/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/user/css/style.css">
+</head>
+<body id="body-background">
+	<div id="wrapper" class="header-color">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		 	<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="{% url 'index' %}">Online Job</a>
+		    	</div>
+		  	</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="job-detail">
+				<div class="detail-job-heading mb30 text-left pdt70">
+					<div class="container">
+						<div class="company-logo">
+			                <img src="{{ object.company.logo_url.url }}" alt="logo">
+			                <span class="job-company-title">{{ object.company }}</span>
+			            </div>
+			            <p>{{ object.company.company_industry }}</p>
+			            <div class="address">
+			                <i class="fa fa-map-marker"></i> {{ object.company.address }}
+			            </div>
+			            <br>
+			            <div class="require-skill pdt30 pdb40">
+			                <span>Skills:</span>
+			                <ul>
+			                    <li><button type="button">Database</button></li>
+			                    <li><button type="button">MySql</button></li>
+			                    <li><button type="button">Node.js</button></li>
+			                    <li><button type="button">Python</button></li>
+			                    <li><button type="button">Django</button></li>
+			                    <li><button type="button">Swift</button></li>
+			                    <li><button type="button">Kotlin</button></li>
+			                    <li><button type="button">Javascript</button></li>
+			                </ul>
+			            </div>
+
+			            <div class="row">
+			                <div class="col-md-6">
+			                    <div class="apply-button mt30" hidden>
+			                        <a href="#" class="green-bg route-button">APPLY FOR THE JOB</a>
+			                        <a href="#" class="cyan-bg route-button">APPLY FOR THE JOB</a>
+			                    </div>
+			                </div>
+			                <div class="col-md-6">
+			                    <div class="share-social-media text-right pdt40 pdb30">
+			                        <span>SHARE THIS JOB</span>
+			                        <ul>
+			                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+			                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+			                            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+			                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+			                        </ul>
+			                    </div>
+			                </div>
+			            </div>
+					</div>
+				</div>
+				<div class="container">
+					<div class="row">
+						<table class="spec-tbl" border="0">
+							<tbody>
+								<tr>
+									<th class="job-data-head"><p>Level</p></th>
+									<td>{{ object.get_level_display }}</td>
+									<th class="job-data-head"><p>Term</p></th>
+									<td>{{ object.term }}</td>
+								</tr>
+								<tr>
+									<th class="job-data-head"><p>Year of Exp.</p></th>
+									<td>{{ object.year_of_experience }}</td>
+									<th class="job-data-head"><p>Function</p></th>
+									<td>{{ object.function }}</td>
+								</tr>
+								<tr>
+									<th class="job-data-head"><p>Hiring</p></th>
+									<td>{{ object.hiring }}</td>
+									<th class="job-data-head"><p>Industry</p></th>
+									<td>{{ object.company.company_industry }}</td>
+								</tr>
+								<tr>
+									<th class="job-data-head"><p>Salary</p></th>
+									<td>{{ object.salary }}</td>
+									<th class="job-data-head"><p>Qualification</p></th>
+									<td>{{ object.education }}</td>
+								</tr>
+								<tr>
+									<th class="job-data-head"><p>Sex</p></th>
+									<td>{{ object.get_sex_display }}</td>
+									<th class="job-data-head"><p>Language</p></th>
+									<td>{% for lng in languages %}
+										{{ lng.language }}{% if not forloop.last %}, {% endif %}
+										{% endfor %}
+									</td>
+								</tr>
+								<tr>
+									<th class="job-data-head"><p>Age</p></th>
+									<td>{{ object.age }}</td>
+									<th class="job-data-head"><p>Location</p></th>
+									<td>{{ object.company.location.name }}</td>
+								</tr>
+								<tr>
+									<th class="job-data-head"><p>Publish Date</p></th>
+									<td>{{ object.publish_date }}</td>
+									<th class="job-data-head"><p>Closing Date</p></th>
+									<td>{{ object.closing_date }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="job-description">
+					<h6>Job Descriptions</h6>
+					<p style="white-space: pre-line;">
+						<prev>
+							{{ object.job_description }}
+						</prev>
+					</p>
+				</div>
+				<div class="job-requierment">
+					<h6>Job Requirements</h6>
+					<p style="white-space: pre-line;">
+						{{ object.job_requirement }}
+					</p>
+				</div>
+				<div class="job-benefit">
+					<h6>Benefits</h6>
+					<ul>
+						<li><i class="fa fa-check"></i>
+							Competitive salary with housing, health and travel allowances
+						</li>
+ 						<li><i class="fa fa-check"></i>
+ 							T/A, Mobile bill, Tour allowance
+ 						</li>
+ 						<li><i class="fa fa-check"></i>
+ 							Lunch Facilities: Full Subsidize
+ 						</li>
+ 						<li><i class="fa fa-check"></i>
+ 							Salary Review: Yearly
+ 						</li>
+ 						<li><i class="fa fa-check"></i>
+ 							Festival Bonus: 2
+ 						</li>
+					</ul>
+				</div>
+				<div class="contact-information">
+                    <h6>Contact Information</h6>
+                    <table width="100%" border="0" class="main-job-w main-job-tab">
+					    <tbody>
+                            <tr>
+                                <th style="width:158px"><p>Contact Person</p></th>
+                                <td>{{ object.company.account.get_full_name }}</td>
+                            </tr>
+							<tr>
+								<th><p>Phone</p></th>
+								<td>{{ object.company.account.phone }}</td>
+							</tr>
+                            <tr>
+                                <th><p>Email</p></th>
+                                <td>{{ object.company.email }}</td>
+                            </tr>
+							<tr>
+								<th><p>Website</p></th>
+								<td><a target="_blank" href="{{ object.company.website }}">{{ object.company.website }}</a></td>
+							</tr>
+							<tr>
+								<th><p>Address</p></th>
+								<td>{{ object.company.address }}</td>
+							</tr>
+
+				        </tbody>
+                    </table>
+				</div>
+				<div class="how-to-apply">
+					<h6>How to Apply</h6>
+                    <ul>
+                        <li><i class="fa fa-check"></i>
+                        	The application window for the class of 2017 will open January 2, 2017 and close February 28, 2017.
+                        </li>
+                        <li><i class="fa fa-check"></i>
+                        	Applicants will be asked to submit their resume, high school and college transcripts (unofficial will suffice), and answer an essay question.
+                        </li>
+                    </ul>
+                    <div class="row">
+                    	<div class="col-sm-6 apply-website">
+                            <a href="{{ object.company.website }}" class="btn btn-primary">
+                            	<i class="fa fa-globe" style="margin-right: 10px;">   COMPANY <span>WEBSITE</span></i>
+                            </a>
+                            <a href="mailTo:{{ object.company.email }}" class="btn btn-success">
+                            	<i class="fa fa-envelope"></i>EMAIL TO <span>RECRUITER</span></i>
+                            </a>
+                        </div>
+                    </div>
+				</div>
+				{% if not object.company.description %}
+				{% else %}
+				<div class="company-info">
+					<h6>Company Profile</h6>
+                    <p>
+                        {{ object.company.description }}
+                    </p>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../static/user/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/user/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../static/user/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="../../static/user/js/main.js"></script>
+</body>
+</html>

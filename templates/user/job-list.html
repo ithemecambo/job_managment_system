@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Online Job</title>
+	<link rel="stylesheet" type="text/css" href="../../static/user/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../static/user/css/style.css">
+</head>
+<body id="body-background">
+	<div id="wrapper" class="header-color">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		 	<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="{% url 'index' %}">Online Job</a>
+		    	</div>
+		  	</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="job-list">
+				<div class="container mt-5">
+					{% if object_list %}
+					<div class="row">
+						<div class="col-sm"><h5>{{ jobs |length }} Jobs Available</h5></div>
+					</div>
+					{% else %}
+					{% endif %}
+				    <div class="row">
+						{% for job in object_list %}
+				        <div class="col-md-4">
+				            <div class="card p-3">
+				                <div class="d-flex flex-row mb-3">
+				                	<a href="{{ job.get_absolute_url }}">
+				                		<img src="{{ job.company.logo_url.url }}" width="70">
+				                	</a>
+				                    <div class="d-flex flex-column ml-2">
+				                    	<span><a href="{{ job.get_absolute_url }}">{{ job.function }}</a></span>
+				                    	<span class="text-black-50 text-limit-just-one">{{ job.company.company_industry }}</span>
+				                    	<div class="salary"><span><i class="fa fa-money"></i> {{ job.salary }}</span></div>
+				                    </div>
+				                </div>
+				                <p class="company-address text-limit-show"><i class="fa fa-map-marker"></i> {{ job.company.address }}</p>
+				                <div class="d-flex justify-content-between install mt-3">
+				                	<span class="dateline"><i class="fa fa-clock-o"></i> {{ job.closing_date }}</span>
+				                	<a href="mailTo:{{ job.company.email }}">
+										<span class="btn btn-primary">Apply Now&nbsp;<i class="fa fa-angle-right"></i></span>
+									</a>
+				                </div>
+				            </div>
+				        </div>
+						{% empty %}
+						<div class="row h-100 justify-content-center align-items-center">
+							<div class="col-md-12 h-100">
+								<div class="main-wrapper error-wrapper">
+									<div class="error-box center">
+										<h1><i class="fa fa-warning"></i> Job Not Found</h1>
+										<p>You can search other jobs that you want to find or return to the homepage.</p>
+										<a href="{% url 'index' %}" class="btn btn-primary go-home">Go to Home</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+				    </div>
+
+					<br>
+					{% if is_paginated %}
+						{% include 'partials/_pagination.html' %}
+					{% endif %}
+					<br><br>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../static/user/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/user/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../static/user/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="../../static/user/js/main.js"></script>
+</body>
+</html>

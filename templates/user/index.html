@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Online Job</title>
+	<link rel="stylesheet" href="../../static/user/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../static/user/css/style.css">
+</head>
+<body id="body-background">
+	<div id="wrapper">
+		<nav class="navbar navbar-expand-ms navbar-light bg-light">
+		 	<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="{% url 'index' %}">Online Job</a>
+		    	</div>
+		  	</div>
+		</nav>
+	</div>
+	<div class="containt-data">
+		<div class="row">
+			<div id="content">
+				<div class="col-sm-12 text-center job-logo">
+					<img class="job-animation" src="../../static/user/img/job-animation.gif">
+				</div>
+				<div class="col-sm-12 simple-data">
+					<div class="nav-left">
+						<p class="head-title">Find Jobs and get placed</p>
+						<p class="sub-title">It's simple, we will help you all the way</p>
+						<div>
+							<a href="{% url 'job-lists' %}" class="btn btn-success">Let's Get Started</a>
+							<a href="{% url 'dashboard' %}" target="_blank" class="btn btn-warning">Are you Admin?</a>
+						</div>
+					</div>
+					<div class="mt-20 text-center">
+					    <div class="row">
+					        <div class="col-md-6">
+					            <div class="card p-3 text-center">
+					                <div>
+					                	<img src="../../static/user/img/fast.png" width="70">
+					                </div>
+					                <h6 class="job-home-title">Fast</h6>
+					                <div class="d-flex flex-column ml-2"><span>Fast results and verified jobs</span></div>
+					            </div>
+					        </div>
+					        <div class="col-md-6">
+					            <div class="card p-3 text-center">
+					                <div>
+					                	<img src="../../static/user/img/simple.png" width="70">
+					                </div>
+					                <h6 class="job-home-title">Simple</h6>
+					                <div class="d-flex flex-column ml-2"><span>Easy to use interface</span></div>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="../../static/user/js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="../../static/user/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../../static/user/js/main.js"></script>
+</body>
+</html>

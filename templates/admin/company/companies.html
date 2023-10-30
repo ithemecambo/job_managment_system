@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Job</title>
+    {% include 'admin_partials/_css.html' %}
+</head>
+
+<body>
+    <div id="wrapper">
+        {% include 'admin_partials/_header.html' %}
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'candidates' %}"><i class="fa fa-fw fa-users"></i> Candidates</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'categories' %}"><i class="fa fa-qrcode"></i> Categories</a>
+                    </li>
+                    <li>
+                        <a class="active-menu" href="{% url 'companies' %}"><i class="fa fa-fw fa-building"></i> Companies</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'jobs' %}"><i class="fa fa-fw fa-search"></i> Jobs</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'banners' %}"><i class="fa fa-fw fa-image"></i> Banners</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'notifications' %}"><i class="fa fa-fw fa-bell-o"></i> Notifications</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> Reports<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="{% url 'report-companies' %}"><i class="fa fa-building"></i> Companies</a></li>
+                            <li><a href="{% url 'report-candidates' %}"><i class="fa fa-users"></i> Candidates</a></li>
+                            <li><a href="{% url 'report-upload-jobs' %}"><i class="fa fa-upload"></i> Upload Jobs</a></li>
+                            <li><a href="{% url 'report-apply-jobs' %}"><i class="fa fa-paper-plane"></i> Apply Jobs</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{% url 'index' %}"><i class="fa fa-fw fa-globe"></i> Website</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'company-setting' %}"><i class="fa fa-fw fa-cog"></i> Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="logoutAction()"><i class="fa fa-fw fa-power-off"></i> Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-sm-4 col-3">
+                            <h1>Companies</h1>
+                        </div>
+                        <div class="col-sm-8 col-9 text-right m-b-20">
+                            <a href="add-job.html" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <span class="btn-font-size">Add Company</span></a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Profile</th>
+<!--                                                <th>Industry</th>-->
+                                                <th>Founded</th>
+<!--                                                <th>Revenue</th>-->
+                                                <th>Tel</th>
+                                                <th>Email</th>
+                                                <th>Website</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-right" width="12%">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for company in object_list %}
+                                            <tr>
+                                                <td>
+                                                    {% if company.logo_url != '' %}
+                                                    <img width="50" src="{{ company.logo_url.url }}"><span style="margin-left: 7px;">
+                                                    <strong>{{ company.name }}</strong></span>
+                                                    {% else %}
+                                                    <img width="50" src="../../../static/admin/img/shopify-logo.png"><span style="margin-left: 7px;">
+                                                    <strong>{{ company.name }}</strong></span>
+                                                    {% endif %}
+                                                </td>
+<!--                                                <td>{{ company.company_industry }}</td>-->
+                                                <td>{{ company.founded }}</td>
+<!--                                                <td>{{ company.revenue }}</td>-->
+                                                <td>
+                                                    {% if company.phone != '' %}
+                                                        <a class="tel" href="tel:{{ company.phone }}">
+                                                            {{ company.phone }}
+                                                        </a>
+                                                    {% else %}
+                                                        {{ company.phone }}
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <a class="email" href="mailTo:{{ company.email }}">
+                                                        {{ company.email }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="website" href="{{ company.website }}">
+                                                        {{ company.website }}
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">
+                                                    {% if company.status %}
+                                                        <i id="status-yes" class="fa fa-check-circle"></i>
+                                                    {% else %}
+                                                        <i id="status-no" class="fa fa-times-circle"></i>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="td-actions text-right">
+                                                    <button type="button" class="btn btn-info btn-just-icon btn-sm" title="View">
+                                                        <i class="material-icons">visibility</i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-success btn-just-icon btn-sm" title="Edit">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-just-icon btn-sm" title="Delete">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                {% include 'admin_partials/_pagination.html' %}
+                            </div>
+                        </div>
+                        <!--End Advanced Tables -->
+                    </div>
+                </div>
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+
+    {% include 'admin_partials/_js.html' %}
+
+</body>
+</html>
