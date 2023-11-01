@@ -76,7 +76,7 @@ $ python manage.py runserver # default port 8000
 ```
 
 ```sh
-$ # Access the web app in browser: http://127.0.0.1:8000/
+$ # Access the web app in the browser: http://127.0.0.1:8000/
 ```
 
 # Screenshot
@@ -97,9 +97,7 @@ $ # Access the web app in browser: http://127.0.0.1:8000/
 * Skype: kheang.senghort2
 * Facebook: kheang senghort
 * LinkedIn: kheang senghort
-* Telegram: 775-230-8584
 
 ## Contact Info
 * Email: senghort.rupp@gmail.com
-* Tel: 775-230-8584
 
